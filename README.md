@@ -1,4 +1,4 @@
-[![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/siaguirre/Pytune/blob/main/RUTA/TU_ARCHIVO.ipynb)
+[![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/siaguirre/Pytune/blob/main/notebooks/app.ipynb)
 
 
 # Proyecto Pytune - Grupo 3
