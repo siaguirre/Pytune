@@ -1,3 +1,6 @@
+[![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/siaguirre/Pytune/blob/main/RUTA/TU_ARCHIVO.ipynb)
+
+
 # Proyecto Pytune - Grupo 3
 
 ## Algoritmos y Estructura de Datos 1
