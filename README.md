@@ -1,5 +1,14 @@
 [![Abrir en Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/siaguirre/Pytune/blob/colabNotebook/notebooks/app.ipynb)
 
+# ¿Cómo correr el proyecto?
+1. Cloná el repositorio
+2. Cargá el archivo app.ipynb como notebook en Colab y ejecutalo
+3. Te va a pedir una clave para crear el túnel con Ngrok, esta clave está subida al chat de Teams del TP.
+4. Ngrok va a devolver una URL, copiarla y pegarla en el .env en GRONK_URL.
+5. Antes de iniciar app.py por primera vez, crear un entorno y realizar una instalacion de las dependencias. 
+> python -m venv nombre_ambiente
+> pip install -r requirements.txt
+6. Ejecutar app.py.
 
 # Proyecto Pytune - Grupo 3
 

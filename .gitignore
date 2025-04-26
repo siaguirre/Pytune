@@ -1,6 +1,3 @@
-venv/
-config/ngrok.yml
-__pycache__/
-*.pyc
-*.wav
-.vscode/
+# Created by venv; see https://docs.python.org/3/library/venv.html
+./env
+.env
