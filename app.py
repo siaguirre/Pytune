@@ -3,6 +3,17 @@ import requests
 from dotenv import load_dotenv, dotenv_values
 import os
 
+prompt_history = []  
+prompt_history_limit = 5 
+
+prompt_variations = [
+    ["Tranquilo", "Piano"],
+    ["Épico", "Guitarra Eléctrica"],
+    ["Melancólico", "Violín"],
+    ["Futurista", "Sintetizador"],
+    ["Alegre", "Ukelele"],
+]
+
 def load_env():
     """Carga las variables de entorno desde el archivo .env."""
     if os.path.exists('.env'):
@@ -25,6 +36,19 @@ def register_routes(app, NGROK_URL: str):
     @app.route('/')
     def index():
         return render_template('index.html')
+    
+    @app.route('/get_history')
+    def get_history():
+        # Ordenar prompts de mayor a menor longitud usando lambda
+        sorted_history = sorted(prompt_history, key=lambda p: len(p), reverse=True)
+        return jsonify(sorted_history)
+
+
+    @app.route('/get_suggestions')
+    def get_suggestions():
+        # Transformar matriz en prompts estilo "Estilo con Instrumento"
+        suggestions = list(map(lambda x: f"{x[0]} con {x[1]}", prompt_variations))
+        return jsonify(suggestions)
 
     @app.route('/send_prompt', methods=['POST'])
     def send_prompt():
@@ -35,8 +59,10 @@ def register_routes(app, NGROK_URL: str):
 
         if not prompt:
             return jsonify({'error': 'No prompt provided'}), 400
-
-        # Armamos el payload
+        
+        prompt_history.append(prompt)
+        global prompt_history
+        prompt_history = prompt_history[-10:]
         payload = {'prompt': prompt}
 
         # Hacemos el POST al servidor remoto (notebook)
@@ -57,7 +83,7 @@ def register_routes(app, NGROK_URL: str):
         except Exception as e:
             print(f"Error al conectar con el servidor remoto: {e}")
             return jsonify({'error': 'Could not generate music'}), 500
-
+            
 def main():
     """Función principal para iniciar la aplicación Flask."""
     app = Flask(__name__)
