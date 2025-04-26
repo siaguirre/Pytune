@@ -52,6 +52,7 @@ def register_routes(app, NGROK_URL: str):
 
     @app.route('/send_prompt', methods=['POST'])
     def send_prompt():
+        global prompt_history
         """Recibe un prompt y lo envía al servidor remoto (notebook) para generar música."""
         print("Recibiendo prompt...")
         # Obtenemos el prompt del formulario
@@ -61,7 +62,6 @@ def register_routes(app, NGROK_URL: str):
             return jsonify({'error': 'No prompt provided'}), 400
         
         prompt_history.append(prompt)
-        global prompt_history
         prompt_history = prompt_history[-10:]
         payload = {'prompt': prompt}
 
