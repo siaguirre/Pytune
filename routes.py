@@ -1,4 +1,4 @@
-from flask import render_template, request, jsonify
+from flask import render_template, request, jsonify, make_response
 import requests
 from utils import prompt_history, prompt_variations
 
@@ -7,11 +7,19 @@ def register_routes(app, NGROK_URL: str):
     def index():
         return render_template('index.html')
 
-    @app.route('/get_history')
+    @app.route('/get_history', methods=['GET', 'OPTIONS'])
     def get_history():
         """Devuelve historial de prompts ordenado por longitud"""
+        if request.method == 'OPTIONS':
+          response = make_response()
+          response.headers.add("Access-Control-Allow-Origin", "*")
+          response.headers.add("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+          response.headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization")
+          return response
         sorted_history = sorted(prompt_history, key=lambda p: len(p), reverse=True)
-        return jsonify(sorted_history)
+        response = make_response(jsonify(sorted_history))
+        response.headers.add("Content-Type", "application/json")
+        return response
 
     @app.route('/get_suggestions')
     def get_suggestions():
