@@ -1,4 +1,4 @@
-[![Abrir en Colab](https://colab.research.google.com/github/siaguirre/Pytune/blob/main/notebooks/app.ipynb#scrollTo=QXtcpW3Vg1xp)]
+[🚀Abrir en Colab](https://colab.research.google.com/github/siaguirre/Pytune/blob/main/notebooks/app.ipynb#scrollTo=QXtcpW3Vg1xp)
 
 # ¿Cómo correr el proyecto?
 1. Cloná el repositorio
