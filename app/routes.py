@@ -1,7 +1,13 @@
 from flask import render_template, request, jsonify, make_response
 import requests
-from utils import prompt_history, prompt_variations
-
+from .utils import prompt_history, prompt_variations
+def allow_cors():
+    """Permite CORS para la respuesta"""
+    response = make_response()
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    response.headers.add("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+    response.headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization")
+    return response
 def register_routes(app, NGROK_URL: str):
     @app.route('/')
     def index():
@@ -11,11 +17,9 @@ def register_routes(app, NGROK_URL: str):
     def get_history():
         """Devuelve historial de prompts ordenado por longitud"""
         if request.method == 'OPTIONS':
-          response = make_response()
-          response.headers.add("Access-Control-Allow-Origin", "*")
-          response.headers.add("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-          response.headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization")
-          return response
+            response = allow_cors()
+            return response
+        
         sorted_history = sorted(prompt_history, key=lambda p: len(p), reverse=True)
         response = make_response(jsonify(sorted_history))
         response.headers.add("Content-Type", "application/json")

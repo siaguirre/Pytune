@@ -1,7 +1,7 @@
 from flask import Flask
 import os
-from config import load_env_variables
-from routes import register_routes
+from .config import load_env_variables
+from .routes import register_routes
 
 def main():
     app = Flask(__name__)
@@ -19,7 +19,3 @@ def main():
     register_routes(app, NGROK_URL)
 
     return app
-
-if __name__ == '__main__':
-    app = main()
-    app.run(debug=True, port=5000)
