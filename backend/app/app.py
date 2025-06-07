@@ -4,7 +4,7 @@ from .config import load_env_variables
 from .routes import register_routes
 
 def main():
-    app = Flask(__name__)
+    app = Flask(__name__, template_folder='../templates')
     
     # Crea carpeta de salida
     if not os.path.exists("output"):

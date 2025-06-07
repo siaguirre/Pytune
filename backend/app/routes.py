@@ -1,6 +1,52 @@
 from flask import render_template, request, jsonify, make_response
 import requests
-from .utils import prompt_history, prompt_variations
+#from .utils import prompt_history, prompt_variations
+prompt_history = {
+    "prompts": [
+        {
+            "prompt": "Escribe aquí tu prompt...",
+            "fecha_introduccion": "2024-06-11T15:30:00Z",
+            "respuesta_ia": "La IA devolvió información relevante sobre la pista solicitada.",
+            "duracion_pista_segundos": 120
+        },
+        {
+            "prompt": "Prompt distinto 2",
+            "fecha_introduccion": "anasheeee",
+            "respuesta_ia": "La IA devolvió información relevante sobre la pista solicitada.",
+            "duracion_pista_segundos": 120
+        }
+    ]
+        
+}
+
+prompt_variations = [
+    {
+        "estilo": "Tranquilo",
+        "instrumento": "Piano",
+        "genero": "Jazz"
+    },
+    {
+        "estilo": "Épico",
+        "instrumento": "Guitarra Eléctrica",
+        "genero": "Clasica"
+    },
+    {
+        "estilo": "Melancólico",
+        "instrumento": "Violín",
+        "genero": "Rock"
+    },
+    {
+        "estilo": "Futurista",
+        "instrumento": "Sintetizador",
+        "genero": "Electrónica"
+    },
+    {
+        "estilo": "Alegre",
+        "instrumento": "Ukelele",
+        "genero": "Rap"
+    }
+]
+
 def allow_cors():
     """Permite CORS para la respuesta"""
     response = make_response()
@@ -8,6 +54,7 @@ def allow_cors():
     response.headers.add("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
     response.headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization")
     return response
+
 def register_routes(app, NGROK_URL: str):
     @app.route('/')
     def index():
@@ -39,8 +86,8 @@ def register_routes(app, NGROK_URL: str):
         if not prompt:
             return jsonify({'error': 'No prompt provided'}), 400
 
-        prompt_history.append(prompt)
-        prompt_history = prompt_history[-10:]
+        #prompt_history.append(prompt)
+        #prompt_history = prompt_history[-10:]
         payload = {'prompt': prompt}
 
         try:
