@@ -1,6 +1,8 @@
-export const selectOptions = {
+import { SelectOptions } from "../types/common";
+
+export const selectOptions: SelectOptions = {
   mood: [
-    { value: "", label: "Estado de Animo" },
+    { value: "", label: "Estado de Ánimo" },
     { value: "feliz", label: "Feliz" },
     { value: "relajado", label: "Relajado" },
     { value: "triste", label: "Triste" },
@@ -14,10 +16,10 @@ export const selectOptions = {
     { value: "sintetizador", label: "Sintetizador" },
   ],
   gender: [
-    { value: "", label: "Genero" },
+    { value: "", label: "Género" },
     { value: "pop", label: "Pop" },
     { value: "rock", label: "Rock" },
     { value: "jazz", label: "Jazz" },
-    { value: "clasico", label: "Clasico" },
+    { value: "clasico", label: "Clásico" },
   ],
 };

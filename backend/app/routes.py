@@ -1,6 +1,7 @@
-from flask import render_template, request, jsonify, make_response
 import requests
-from .utils import prompt_history, prompt_variations
+from flask import render_template, request, jsonify, make_response
+from .utils import get_prompt_history
+
 def allow_cors():
     """Permite CORS para la respuesta"""
     response = make_response()
@@ -8,6 +9,7 @@ def allow_cors():
     response.headers.add("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
     response.headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization")
     return response
+
 def register_routes(app, NGROK_URL: str):
     @app.route('/')
     def index():
@@ -19,9 +21,9 @@ def register_routes(app, NGROK_URL: str):
         if request.method == 'OPTIONS':
             response = allow_cors()
             return response
-        
+        prompt_history = get_prompt_history()
         sorted_history = sorted(prompt_history, key=lambda p: len(p), reverse=True)
-        response = make_response(jsonify(sorted_history))
+        response = make_response(sorted_history)
         response.headers.add("Content-Type", "application/json")
         return response
 
@@ -30,7 +32,7 @@ def register_routes(app, NGROK_URL: str):
         """Devuelve sugerencias de prompts"""
         suggestions = [f"{x[0]} con {x[1]}" for x in prompt_variations]
         return jsonify(suggestions)
-
+    
     @app.route('/send_prompt', methods=['POST'])
     def send_prompt():
         global prompt_history

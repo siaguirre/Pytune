@@ -2,3 +2,6 @@
 ./env
 .env
 *.pyc
+node_modules
+__pycache__
+venv*
