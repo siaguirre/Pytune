@@ -41,7 +41,23 @@ Pytune/
    cd backend
    ```
 
-2. **Instalar dependencias de Python:**
+2. **Crear entorno virtual:**
+   ```bash
+   python -m /venv
+   ```
+
+3. **Activar entorno virtual:**
+   En Windows:
+   ```bash
+   venv\Scripts\activate
+   ```
+   En Linux/Mac:
+   ```bash
+   source venv/bin/activate
+   ```
+
+3. **Instalar dependencias de Python:**
+   Asegurarse de estar con el entorno virtual activado
    ```bash
    pip install -r requirements.txt
    ```
@@ -50,8 +66,6 @@ Pytune/
    ```bash
    python run.py
    ```
-   
-   El backend se ejecutará en `http://127.0.0.1:5000`
 
 ### 🎨 Configuración del Frontend (React)
 
@@ -72,14 +86,6 @@ Pytune/
    
    El frontend se ejecutará en `http://localhost:5173`
 
-### 🌐 Acceso a la Aplicación
-
-Una vez que ambos servidores estén ejecutándose:
-- Abre tu navegador en `http://localhost:5173`
-- La aplicación React se comunicará automáticamente con el backend Flask
-
----
-
 ## 🛠️ Stack Tecnológico
 
 ### Frontend
@@ -87,7 +93,6 @@ Una vez que ambos servidores estén ejecutándose:
 - **Vite** como bundler
 - **TailwindCSS** para estilos
 - **FontAwesome** para íconos
-- **Axios** para peticiones HTTP
 
 ### Backend
 - **Flask 3.1** como framework web
@@ -168,9 +173,7 @@ El sistema permite:
 ### Variables de Entorno (Backend)
 Crear archivo `.env` en la carpeta `backend/`:
 ```env
-FLASK_ENV=development
-FLASK_DEBUG=True
-NGROK_URL=https://tu-url-ngrok.com/generate_music
+NGROK_URL=https://url.com/generate_music
 ```
 ---
 

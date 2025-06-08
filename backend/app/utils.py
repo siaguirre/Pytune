@@ -1,5 +1,9 @@
 import os, json, io
 
+# Inicializar variables globales
+prompt_history = []
+prompt_variations = []
+
 def open_log_file(mode='r', data='', file_name='') -> str:
     """Abre el archivo de log."""
     def read_log_file(file) -> list:

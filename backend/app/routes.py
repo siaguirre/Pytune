@@ -1,6 +1,6 @@
 import requests
 from flask import render_template, request, jsonify, make_response
-from utils import get_prompt_history
+from .utils import get_prompt_history
 
 def allow_cors():
     """Permite CORS para la respuesta"""
