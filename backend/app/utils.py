@@ -9,14 +9,8 @@ def open_log_file(mode='r', data='', file_name='') -> str:
         return data['prompts']
     
     def write_log_file(file, data: str) -> None:
-        """
-        Escribe los datos en el archivo de log.
-        args:
-            data (str): Los datos a escribir en el archivo de log.
-            log_file_path (str): La ruta del archivo de log.
-        """
+        """ Escribe los datos en el archivo de log. """
         prompt_list = read_log_file(file)
-
         json.dump(data, file, ensure_ascii=False, indent=4)
         
     file = open_file(file_name, mode)
