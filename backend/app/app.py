@@ -20,11 +20,7 @@ def main():
     register_routes(app, NGROK_URL)
 
     return app
-<<<<<<<< HEAD:app/app.py
 
 if __name__ == "__main__":
     app = main()
     app.run(debug=True)
-
-========
->>>>>>>> main:backend/app/app.py
