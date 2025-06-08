@@ -34,15 +34,16 @@ def open_log_file(mode='r', data='', file_name='') -> str:
 def process_prompt(prompt, keys, i=0):
     """Recibe prompt y llaves totales del diccionario para quedarse con las que resulten importantes """
     important_keys = ['fecha_introduccion', 'prompt']
+    
     if len(prompt) <= len(important_keys):
         return prompt
+        
+    if i >= len(keys):
+        i = 0
     
     if keys[i] not in important_keys:
         prompt.pop(keys[i])
         keys.pop(i)
-        
-    if i >= len(keys):
-        i = 0
     i+=1
     return process_prompt(prompt, keys, i)
     
