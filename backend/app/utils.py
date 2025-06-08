@@ -1,77 +1,57 @@
-import os, json
+import os, json, io
 
-# Inicializar variables globales
-prompt_history = []
-prompt_variations = []
-
-def load_prompt_variations():
-    """Carga las variaciones de prompts desde el archivo JSON."""
-    current_dir = os.path.dirname(__file__)
-    variations_file_path = os.path.join(current_dir, 'utils', 'prompt_variations.json')
+def open_log_file(mode='r', data='', file_name='') -> str:
+    """Abre el archivo de log."""
+    def read_log_file(file) -> list:
+      
+        print("Reading log file...")
+        data = json.load(file)
+        return data['prompts']
     
+    def write_log_file(file, data: str) -> None:
+        """ Escribe los datos en el archivo de log. """
+        prompt_list = read_log_file(file)
+        json.dump(data, file, ensure_ascii=False, indent=4)
+        
+    file = open_file(file_name, mode)
+    if not isinstance(file, io.IOBase):
+        return file
+    else:
+        if mode == 'r':
+            data = read_log_file(file)
+            file.close()
+            return data
+        elif mode == 'w':
+            write_log_file(file, data)
+            file.close()
+    
+def process_prompt(prompt, keys, i=0):
+    """Recibe prompt y llaves totales del diccionario para quedarse con las que resulten importantes """
+    important_keys = ['fecha_introduccion', 'prompt']
+    
+    if len(prompt) <= len(important_keys):
+        return prompt
+        
+    if i >= len(keys):
+        i = 0
+    
+    if keys[i] not in important_keys:
+        prompt.pop(keys[i])
+        keys.pop(i)
+    i+=1
+    return process_prompt(prompt, keys, i)
+    
+def open_file(file_name, mode='r'):
+    current_dir = os.path.dirname(__file__)
+    log_file_path = os.path.join(current_dir, 'utils',file_name)
     try:
-        with open(variations_file_path, 'r', encoding='utf-8') as file:
-            data = json.load(file)
-            return [(item['estilo'], item['instrumento']) for item in data]
+        return open(log_file_path, mode, encoding='utf-8')    
     except FileNotFoundError:
-        print("Archivo deVariaciones no encontrado.")
-        return []
+        return "No se encontró el archivo."
     except Exception as e:
-        print(f"Error al cargar variaciones: {e}")
-        return []
+        return f"Se encontró un error al abrir el archivo de Log {e}"
 
-def read_log_file(file) -> str:
-    """
-    Read the log file and return its content.
-    
-    Args:
-        file: The file object to read from.
-        
-    Returns:"""
-    print("Reading log file...")
-    data = json.load(file)
-    prompts = data['prompts']
-    prompt_list = [prompt['prompt'] for prompt in prompts]
-    for prompt in prompt_list:
-        print(prompt)
-        
-    return prompt_list
-        
-    
-def open_log_file() -> str:
-    """
-    Open the log file and return its content.
-    
-    Returns:
-        str: The content of the log file.
-    """
-    current_dir = os.path.dirname(__file__)
-    log_file_path = os.path.join(current_dir, 'utils','prompt_log.json')
-    try:
-        with open(log_file_path, 'r', encoding='utf-8') as file:
-            history = read_log_file(file)
-    except FileNotFoundError:
-        return "Log file not found."
-    except Exception as e:
-        return f"An error occurred while reading the log file: {e}"
-
-def write_log_file(data: str) -> None:
-    """
-    Write data to the log file.
-    
-    Args:
-        data: The data to write to the log file.
-    """
-    current_dir = os.path.dirname(__file__)
-    log_file_path = os.path.join(current_dir, 'utils', 'prompt_log.json')
-    
-    try:
-        with open(log_file_path, 'w', encoding='utf-8') as file:
-            json.dump(data, file, ensure_ascii=False, indent=4)
-        print("Log file updated successfully.")
-    except Exception as e:
-        print(f"An error occurred while writing to the log file: {e}")
-
-# Cargar las variaciones al importar el módulo
-prompt_variations = load_prompt_variations()
-open_log_file()
+def get_prompt_history():
+    prompts = open_log_file('r', file_name='prompt_log.json')
+    clean_prompts = [process_prompt(prompt, list(prompt.keys())) for prompt in prompts]
+    return clean_prompts

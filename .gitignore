@@ -2,7 +2,6 @@
 ./env
 .env
 *.pyc
-
+/venv
 node_modules
-
 __pycache__
