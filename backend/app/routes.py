@@ -43,7 +43,7 @@ def register_routes(app, NGROK_URL: str):
         save_prompt(prompt)
 
         try:
-            response = requests.post(f"{NGROK_URL}/generate_music", json=payload)
+            response = requests.post(f"{NGROK_URL}generate_music", json={'prompt': prompt})
             response.raise_for_status()
 
             if response.headers.get('Content-Type') == 'application/octet-stream':
