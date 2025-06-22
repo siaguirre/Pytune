@@ -1,17 +1,20 @@
 {
     "prompts": [
         {
-            "prompt": "Escribe aquí tu prompt...",
-            "fecha_introduccion": "2024-06-11T15:30:00Z",
-            "respuesta_ia": "La IA devolvió información relevante sobre la pista solicitada.",
-            "duracion_pista_segundos": 120
+            "prompt": "como te llamas",
+            "fecha_introduccion": "2025-06-22T20:15:40.976805"
         },
         {
-            "prompt": "Prompt distinto 2",
-            "fecha_introduccion": "anasheeee",
-            "respuesta_ia": "La IA devolvió información relevante sobre la pista solicitada.",
-            "duracion_pista_segundos": 120
+            "prompt": "como te llamas",
+            "fecha_introduccion": "2025-06-22T20:15:56.625360"
+        },
+        {
+            "prompt": "tocate solo",
+            "fecha_introduccion": "2025-06-22T20:16:48.739724"
+        },
+        {
+            "prompt": "tocate solo",
+            "fecha_introduccion": "2025-06-22T20:23:38.046907"
         }
     ]
-        
 }

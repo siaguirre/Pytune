@@ -1,4 +1,5 @@
 import os, json, io
+from datetime import datetime
 
 # Inicializar variables globales
 prompt_history = []
@@ -7,17 +8,31 @@ prompt_variations = []
 def open_log_file(mode='r', data='', file_name='') -> str:
     """Abre el archivo de log."""
     def read_log_file(file) -> list:
-      
-        print("Reading log file...")
+        file.seek(0)
+        first_char = file.read(1)
+        if not first_char:
+            return []
+        file.seek(0)
         data = json.load(file)
-        return data['prompts']
+        file.close()
+        return data.get('prompts', [])
     
-    def write_log_file(file, data: str) -> None:
+    def write_log_file(file, data: str, old_prompts) -> None:
         """ Escribe los datos en el archivo de log. """
-        prompt_list = read_log_file(file)
-        json.dump(data, file, ensure_ascii=False, indent=4)
-        
-    file = open_file(file_name, mode)
+        data = {
+            'prompt': data,
+            'fecha_introduccion': datetime.now().isoformat()
+        }
+        if old_prompts:
+            prompts = {'prompts': [process_prompt(prompt, list(prompt.keys())) for prompt in old_prompts]}
+            prompts['prompts'].append(data)
+            if len(prompts['prompts']) > 10:
+                prompts['prompts'] = prompts['prompts'][-10:]
+            json.dump(prompts, file, indent=4, ensure_ascii=False)
+        else:
+            json.dump({'prompts': [data]}, file, indent=4, ensure_ascii=False)
+
+    file = open_file(file_name)
     if not isinstance(file, io.IOBase):
         return file
     else:
@@ -26,7 +41,10 @@ def open_log_file(mode='r', data='', file_name='') -> str:
             file.close()
             return data
         elif mode == 'w':
-            write_log_file(file, data)
+            old_prompts = read_log_file(file)
+            file.close()
+            file = open_file(file_name, 'w')
+            write_log_file(file, data, old_prompts)
             file.close()
     
 def process_prompt(prompt, keys, i=0):
@@ -73,14 +91,14 @@ def open_variations_file(mode='r', data='', file_name='') -> str:
     if not isinstance(file, io.IOBase):
         return file
     else:
-        if mode == 'r':
-            data = read_variations_file(file)
-            file.close()
-            return data
-        elif mode == 'w':
-            write_variations_file(file, data)
-            file.close()
+        data = read_variations_file(file)
+        file.close()
+        return data
 
 def get_variations():
     variations = open_variations_file('r', file_name='prompt_variations.json')
     return variations
+
+def save_prompt(prompt):
+    """Guarda un prompt en el archivo de log."""
+    open_log_file('w', data=prompt, file_name='prompt_log.json')

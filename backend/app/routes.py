@@ -1,6 +1,6 @@
 import requests
 from flask import render_template, request, jsonify, make_response
-from utils import get_prompt_history, get_variations
+from .utils import get_prompt_history, get_variations, save_prompt
 
 def allow_cors():
     """Permite CORS para la respuesta"""
@@ -35,15 +35,12 @@ def register_routes(app, NGROK_URL: str):
     
     @app.route('/send_prompt', methods=['POST'])
     def send_prompt():
-        global prompt_history
         prompt = request.form.get('prompt')
 
         if not prompt:
             return jsonify({'error': 'No prompt provided'}), 400
 
-        prompt_history.append(prompt)
-        prompt_history = prompt_history[-10:]
-        payload = {'prompt': prompt}
+        save_prompt(prompt)
 
         try:
             response = requests.post(f"{NGROK_URL}/generate_music", json=payload)

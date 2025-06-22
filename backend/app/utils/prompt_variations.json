@@ -5,19 +5,19 @@
         "genero": "Jazz"
     },
     {
-        "estilo": "Épico",
+        "estilo": "Epico",
         "instrumento": "Guitarra Eléctrica",
         "genero": "Clasica"
     },
     {
-        "estilo": "Melancólico",
-        "instrumento": "Violín",
+        "estilo": "Melancolico",
+        "instrumento": "Violin",
         "genero": "Rock"
     },
     {
         "estilo": "Futurista",
         "instrumento": "Sintetizador",
-        "genero": "Electrónica"
+        "genero": "Electronica"
     },
     {
         "estilo": "Alegre",
