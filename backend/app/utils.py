@@ -59,3 +59,28 @@ def get_prompt_history():
     prompts = open_log_file('r', file_name='prompt_log.json')
     clean_prompts = [process_prompt(prompt, list(prompt.keys())) for prompt in prompts]
     return clean_prompts
+
+
+def open_variations_file(mode='r', data='', file_name='') -> str:
+    """Abre el archivo de variations."""
+    def read_variations_file(file) -> list:
+      
+        print("Reading variations file...")
+        data = json.load(file)
+        return data
+        
+    file = open_file(file_name, mode)
+    if not isinstance(file, io.IOBase):
+        return file
+    else:
+        if mode == 'r':
+            data = read_variations_file(file)
+            file.close()
+            return data
+        elif mode == 'w':
+            write_variations_file(file, data)
+            file.close()
+
+def get_variations():
+    variations = open_variations_file('r', file_name='prompt_variations.json')
+    return variations
