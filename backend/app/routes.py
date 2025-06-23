@@ -46,13 +46,13 @@ def register_routes(app, NGROK_URL: str):
             response = requests.post(f"{NGROK_URL}generate_music", json={'prompt': prompt})
             response.raise_for_status()
 
-            if response.headers.get('Content-Type') == 'application/octet-stream':
+            if response.headers.get('Content-Type') == 'audio/x-wav':
                 output_path = 'output/musicgen_out.wav'
                 with open(output_path, 'wb') as f:
                     f.write(response.content)
                 return jsonify({'message': 'Music generated successfully', 'file': output_path})
             else:
-                return response.json()
+                return 'Error al descargar el archivo de audio', 500
 
         except Exception as e:
             print(f"Error al conectar con el servidor remoto: {e}")
