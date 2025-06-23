@@ -1,6 +1,7 @@
 import requests
 from flask import render_template, request, jsonify, make_response, send_file
 from .utils import get_prompt_history, get_variations, save_prompt
+import os
 
 def allow_cors():
     """Permite CORS para la respuesta"""
@@ -50,7 +51,8 @@ def register_routes(app, NGROK_URL: str):
                 output_path = 'output/musicgen_out.wav'
                 with open(output_path, 'wb') as f:
                     f.write(response.content)
-                output_path = '../../output/musicgen_out.wav'
+                # Asegura que el path sea absoluto para Flask
+                output_path = os.path.abspath(output_path)
                 return send_file(output_path, as_attachment=True, download_name='melodia.wav', mimetype='audio/x-wav')
             else:
                 return 'Error al descargar el archivo de audio', 500
