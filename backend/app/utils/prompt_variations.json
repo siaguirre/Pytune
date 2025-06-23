@@ -1,27 +1,25 @@
 [
     {
-        "estilo": "Tranquilo",
-        "instrumento": "Piano",
-        "genero": "Jazz"
-    },
-    {
-        "estilo": "Epico",
-        "instrumento": "Guitarra Eléctrica",
-        "genero": "Clasica"
-    },
-    {
-        "estilo": "Melancolico",
-        "instrumento": "Violin",
-        "genero": "Rock"
-    },
-    {
-        "estilo": "Futurista",
-        "instrumento": "Sintetizador",
-        "genero": "Electronica"
-    },
-    {
-        "estilo": "Alegre",
-        "instrumento": "Ukelele",
-        "genero": "Rap"
+        "estilo": [
+            "Tranquilo",
+            "Epico",
+            "Melancolico",
+            "Futurista",
+            "Alegre"
+        ],
+        "instrumento": [
+            "Piano",
+            "Guitarra Eléctrica",
+            "Violin",
+            "Sintetizador",
+            "Ukelele"
+        ],
+        "genero": [
+            "Jazz",
+            "Clasica",
+            "Rock",
+            "Electronica",
+            "Rap"
+        ]
     }
 ]
