@@ -50,6 +50,7 @@ def register_routes(app, NGROK_URL: str):
                 output_path = 'output/musicgen_out.wav'
                 with open(output_path, 'wb') as f:
                     f.write(response.content)
+                output_path = '../../output/musicgen_out.wav'
                 return send_file(output_path, as_attachment=True, download_name='melodia.wav', mimetype='audio/x-wav')
             else:
                 return 'Error al descargar el archivo de audio', 500
