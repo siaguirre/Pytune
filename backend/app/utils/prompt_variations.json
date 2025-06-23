@@ -1,23 +1,11 @@
 {
-        "estilo": [
-            "Tranquilo",
-            "Epico",
-            "Melancolico",
-            "Futurista",
-            "Alegre"
-        ],
-        "instrumento": [
-            "Piano",
-            "Guitarra Eléctrica",
-            "Violin",
-            "Sintetizador",
-            "Ukelele"
-        ],
-        "genero": [
-            "Jazz",
-            "Clasica",
-            "Rock",
-            "Electronica",
-            "Rap"
-        ]
+  "estilo": ["Tranquilo", "Epico", "Melancolico", "Futurista", "Alegre"],
+  "instrumento": [
+    "Piano",
+    "Guitarra Eléctrica",
+    "Violin",
+    "Sintetizador",
+    "Ukelele"
+  ],
+  "genero": ["Jazz", "Clasica", "Rock", "Electronica", "Rap"]
 }
