@@ -46,28 +46,17 @@ def open_log_file(mode='r', data='', file_name='') -> str:
             file = open_file(file_name, 'w')
             write_log_file(file, data, old_prompts)
             file.close()
-    
-def process_prompt(prompt, keys, i=0):
-    """Recibe prompt y llaves totales del diccionario para quedarse con las que resulten importantes """
+
+def process_prompt(prompt, keys=None, i=0):
+    """Devuelve un nuevo diccionario con solo las claves importantes."""
     important_keys = ['fecha_introduccion', 'prompt']
-    
-    if len(prompt) <= len(important_keys):
-        return prompt
-        
-    if i >= len(keys):
-        i = 0
-    
-    if keys[i] not in important_keys:
-        prompt.pop(keys[i])
-        keys.pop(i)
-    i+=1
-    return process_prompt(prompt, keys, i)
-    
+    return {k: v for k, v in prompt.items() if k in important_keys}
+
 def open_file(file_name, mode='r'):
     current_dir = os.path.dirname(__file__)
     log_file_path = os.path.join(current_dir, 'utils',file_name)
     try:
-        return open(log_file_path, mode, encoding='utf-8')    
+        return open(log_file_path, mode, encoding='utf-8')
     except FileNotFoundError:
         return "No se encontró el archivo."
     except Exception as e:
