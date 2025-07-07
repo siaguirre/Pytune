@@ -34,57 +34,9 @@ Pytune/
 - **Node.js 18+** con npm
 - **Git**
 
-### 🔧 Configuración del Backend (Flask)
+### 🔧 Configuración del proyecto
 
-1. **Navegar al directorio del backend:**
-   ```bash
-   cd backend
-   ```
-
-2. **Crear entorno virtual:**
-   ```bash
-   python -m /venv
-   ```
-
-3. **Activar entorno virtual:**
-   En Windows:
-   ```bash
-   venv\Scripts\activate
-   ```
-   En Linux/Mac:
-   ```bash
-   source venv/bin/activate
-   ```
-
-3. **Instalar dependencias de Python:**
-   Asegurarse de estar con el entorno virtual activado
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Ejecutar el servidor Flask:**
-   ```bash
-   python run.py
-   ```
-
-### 🎨 Configuración del Frontend (React)
-
-1. **Navegar al directorio del frontend:**
-   ```bash
-   cd frontend
-   ```
-
-2. **Instalar dependencias de Node.js:**
-   ```bash
-   npm install
-   ```
-
-3. **Ejecutar la aplicación React:**
-   ```bash
-   npm run dev
-   ```
-   
-   El frontend se ejecutará en `http://localhost:5173`
+En la raíz del proyecto vas a encontrar **start.bat**. Ejecutá ese script y seguí los pasos indicados.
 
 ## 🛠️ Stack Tecnológico
 
